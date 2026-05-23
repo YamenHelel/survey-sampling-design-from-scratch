@@ -1,0 +1,55 @@
+# ============================================
+# .gitignore — Survey Sampling Engineering Repo
+# ============================================
+
+# --- Data files (generated / downloaded) ---
+*.csv
+*.sav
+*.dta
+*.rds
+*.RData
+data/
+
+# --- R ---
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+.env
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Output artifacts ---
+*.pdf
+*.html
+*.docx
+!README.md
+!course/**/*.md
