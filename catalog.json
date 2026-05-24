@@ -1,0 +1,68 @@
+{
+  "name": "تصميم عينات المسوح الإحصائية",
+  "name_en": "Survey Sampling Engineering From Scratch",
+  "version": "1.0.0",
+  "languages": ["R", "Python"],
+  "total_phases": 6,
+  "total_lessons": 15,
+  "estimated_hours": 12,
+  "phases": [
+    {
+      "id": "00-sampling-fundamentals",
+      "name": "مبادئ وأسس المعاينة",
+      "name_en": "Sampling Fundamentals",
+      "lessons": [
+        {"id": "01-intro-to-sampling", "name": "مقدمة في مفاهيم معاينة المسوح", "type": "learn", "time_min": 30},
+        {"id": "02-probability-vs-nonprobability", "name": "المعاينة الاحتمالية مقابل غير الاحتمالية", "type": "learn", "time_min": 35},
+        {"id": "03-sampling-error-mechanics", "name": "خطأ المعاينة مقابل الأخطاء غير العينية", "type": "learn", "time_min": 40}
+      ]
+    },
+    {
+      "id": "01-infrastructure-frame-diagnostics",
+      "name": "البنية التحتية وتشخيص الأطر",
+      "name_en": "Infrastructure & Frame Diagnostics",
+      "lessons": [
+        {"id": "01-frame-cleaning-undercoverage", "name": "تنظيف إطار المعاينة", "type": "build", "time_min": 40},
+        {"id": "02-psu-partitioning-harmonization", "name": "تقسيم وتوحيد PSUs", "type": "build", "time_min": 40}
+      ]
+    },
+    {
+      "id": "02-probability-sampling-designs",
+      "name": "التصاميم الاحتمالية من الصفر",
+      "name_en": "Probability Sampling Designs From Scratch",
+      "lessons": [
+        {"id": "01-stratified-optimal-allocation", "name": "المعاينة الطبقية والتوزيع الأمثل", "type": "build", "time_min": 40},
+        {"id": "02-systematic-pps-selection", "name": "السحب المنتظم PPS", "type": "build", "time_min": 40},
+        {"id": "03-multistage-cluster-engine", "name": "المعاينة العنقودية متعددة المراحل", "type": "build", "time_min": 45}
+      ]
+    },
+    {
+      "id": "03-sample-size-calibration",
+      "name": "حجم العينة وأثر التصميم",
+      "name_en": "Sample Size & Design Effect",
+      "lessons": [
+        {"id": "01-cochran-formula-extensions", "name": "امتدادات معادلة كوكران", "type": "build", "time_min": 40},
+        {"id": "02-deff-icc-mechanics", "name": "أثر التصميم ومعامل ICC", "type": "build", "time_min": 40}
+      ]
+    },
+    {
+      "id": "04-weighting-calibration-pipeline",
+      "name": "منظومة الأوزان والمعايرة",
+      "name_en": "Weighting & Calibration Pipeline",
+      "lessons": [
+        {"id": "01-design-weights-generation", "name": "أوزان التصميم القاعدية", "type": "build", "time_min": 35},
+        {"id": "02-nonresponse-propensity-adjustment", "name": "تعديل عدم الاستجابة", "type": "build", "time_min": 40},
+        {"id": "03-calibration-raking-ipf", "name": "معايرة الأوزان — IPF/Raking", "type": "build", "time_min": 45}
+      ]
+    },
+    {
+      "id": "05-variance-estimation",
+      "name": "تقدير التباين",
+      "name_en": "Variance Estimation",
+      "lessons": [
+        {"id": "01-taylor-linearization", "name": "خطية تايلور من الصفر", "type": "build", "time_min": 40},
+        {"id": "02-jackknife-bootstrap-replication", "name": "جاكنايف وبوتستراب", "type": "build", "time_min": 45}
+      ]
+    }
+  ]
+}

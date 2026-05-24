@@ -14,7 +14,7 @@
   <a href="#-المراحل-التعليمية"><img src="https://img.shields.io/badge/المراحل-6_مراحل-blue?style=for-the-badge" alt="6 Phases"/></a>
   <a href="#-الدروس"><img src="https://img.shields.io/badge/الدروس-15_درساً-green?style=for-the-badge" alt="15 Lessons"/></a>
   <a href="#-اللغات"><img src="https://img.shields.io/badge/الأكواد-R_&_Python-orange?style=for-the-badge" alt="R & Python"/></a>
-  <a href="#-الترخيص"><img src="https://img.shields.io/badge/الترخيص-MIT-red?style=for-the-badge" alt="MIT License"/></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/الترخيص-MIT-red?style=for-the-badge" alt="MIT License"/></a>
 </p>
 
 ---
@@ -29,123 +29,152 @@
 |-------|---------|
 | **من الصفر أولاً** | كل خوارزمية تُبنى يدوياً قبل استخدام أي مكتبة جاهزة |
 | **ثنائي اللغة البرمجية** | كل تمرين مكتوب بـ R و Python معاً للمقارنة |
-| **التحقق الصارم** | نقاط تأكيد (`assert` / `stopifnot`) تضمن تطابق النتائج اليدوية مع المكتبات حتى 4 خانات عشرية |
-| **سيناريوهات واقعية** | كل درس يبدأ بأزمة تشغيلية حقيقية من مكاتب الإحصاء الوطنية |
-| **بيانات تركيبية واقعية** | إطار تعداد مُولَّد يحتوي 500,000 أسرة موزعة على محافظات ومناطق |
-| **عربي بمصطلحات إنجليزية** | الشرح بالعربية مع المصطلح الإنجليزي الدقيق عند أول ذكر |
+| **التحقق الصارم** | نقاط تأكيد (`assert` / `stopifnot`) تضمن تطابق النتائج حتى 4 خانات عشرية |
+| **هيكل سداسي موحد** | كل درس يتبع: Motto → Problem → Concept → Build It → Use It → Ship It |
+| **مخرجات إنتاجية** | كل درس يُنتج مهارة أو أداة قابلة لإعادة الاستخدام |
+| **بيانات تركيبية** | إطار تعداد 500,000 أسرة مع عيوب واقعية مُحقَنة |
 
 ---
 
 ## هيكل المستودع
 
 ```text
-├── README.md                              # هذا الملف
+survey-sampling-ar/
+├── README.md                     # هذا الملف
+├── ROADMAP.md                    # خارطة الطريق بحالة كل درس
+├── LESSON_TEMPLATE.md            # قالب إنشاء درس جديد
+├── CONTRIBUTING.md               # دليل المساهمة
+├── LICENSE                       # رخصة MIT
+├── catalog.json                  # فهرس المنهج (آلي)
+├── requirements.txt              # متطلبات Python
 ├── .gitignore
+│
+├── phases/                       # المراحل التعليمية
+│   ├── 00-sampling-fundamentals/
+│   │   ├── README.md             # نظرة عامة على المرحلة
+│   │   ├── 01-intro-to-sampling/
+│   │   │   ├── code/main.R       # تنفيذ R
+│   │   │   ├── code/main.py      # تنفيذ Python
+│   │   │   ├── docs/en.md        # النص التعليمي الكامل
+│   │   │   └── outputs/          # مخرجات إنتاجية
+│   │   ├── 02-probability-vs-nonprobability/
+│   │   └── 03-sampling-error-mechanics/
+│   ├── 01-infrastructure-frame-diagnostics/
+│   ├── 02-probability-sampling-designs/
+│   ├── 03-sample-size-calibration/
+│   ├── 04-weighting-calibration-pipeline/
+│   └── 05-variance-estimation/
+│
+├── glossary/
+│   ├── terms.md                  # قاموس المصطلحات
+│   └── myths.md                  # خرافات شائعة
+│
 ├── scripts/
-│   ├── generate_census_frame.R            # توليد إطار تعداد تركيبي (500 ألف صف)
-│   └── utils.R                            # دوال إحصائية مساعدة مشتركة
-├── course/
-│   ├── phase_0_fundamentals/              # المرحلة 0: الأسس والمبادئ
-│   │   ├── lesson_0_1_intro_sampling.md
-│   │   ├── lesson_0_2_probability_vs_nonprob.md
-│   │   └── lesson_0_3_sampling_error_mechanics.md
-│   ├── phase_1_infrastructure_frames/     # المرحلة 1: البنية التحتية والأطر
-│   │   ├── lesson_1_1_frame_diagnostics.md
-│   │   └── lesson_1_2_psu_partitioning.md
-│   ├── phase_2_probability_designs/       # المرحلة 2: التصاميم الاحتمالية
-│   │   ├── lesson_2_1_stratified_opt_allocation.md
-│   │   ├── lesson_2_2_systematic_pps.md
-│   │   └── lesson_2_3_multistage_engine.md
-│   ├── phase_3_sample_size_calibration/   # المرحلة 3: حجم العينة وأثر التصميم
-│   │   ├── lesson_3_1_cochran_extensions.md
-│   │   └── lesson_3_2_deff_icc_mechanics.md
-│   ├── phase_4_weighting_pipeline/        # المرحلة 4: الأوزان والمعايرة
-│   │   ├── lesson_4_1_design_weights.md
-│   │   ├── lesson_4_2_nonresponse_propensity.md
-│   │   └── lesson_4_3_calibration_raking.md
-│   └── phase_5_variance_estimation/       # المرحلة 5: تقدير التباين
-│       ├── lesson_5_1_taylor_linearization.md
-│       └── lesson_5_2_jackknife_replications.md
-└── tests/
-    ├── test_phase_2_sampling.R            # اختبارات وحدة: المعاينة
-    └── test_phase_4_weights.R             # اختبارات وحدة: الأوزان
+│   ├── generate_census_frame.R   # توليد إطار تعداد تركيبي
+│   └── utils.R                   # دوال مساعدة مشتركة
+│
+├── tests/
+│   ├── test_phase_2_sampling.R   # اختبارات المعاينة
+│   └── test_phase_4_weights.R    # اختبارات الأوزان
+│
+├── projects/                     # مشاريع تخرج (قريباً)
+├── outputs/                      # مخرجات مُجمَّعة
+└── assets/                       # صور ورسومات
 ```
 
 ---
 
 ## المراحل التعليمية
 
-### المرحلة 0: مبادئ وأسس المعاينة (*Sampling Fundamentals*)
+```mermaid
+graph LR
+    P0[المرحلة 0<br/>الأسس والمبادئ] --> P1[المرحلة 1<br/>البنية التحتية]
+    P1 --> P2[المرحلة 2<br/>التصاميم الاحتمالية]
+    P2 --> P3[المرحلة 3<br/>حجم العينة]
+    P2 --> P4[المرحلة 4<br/>الأوزان والمعايرة]
+    P3 --> P4
+    P4 --> P5[المرحلة 5<br/>تقدير التباين]
+```
 
-> الأساس الرياضي والمفاهيمي الذي لا يمكن تجاوزه قبل كتابة أي سطر كود.
+### المرحلة 0: مبادئ وأسس المعاينة `3 دروس`
 
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 0.1 | [مقدمة في مفاهيم معاينة المسوح](course/phase_0_fundamentals/lesson_0_1_intro_sampling.md) | المجتمع المستهدف، إطار المعاينة، المعلمة مقابل المقدِّر |
-| 0.2 | [الخط الفاصل: المعاينة الاحتمالية مقابل غير الاحتمالية](course/phase_0_fundamentals/lesson_0_2_probability_vs_nonprob.md) | احتمالات الاشتمال المعلومة وغير الصفرية |
-| 0.3 | [ميكانيكا خطأ المعاينة مقابل الأخطاء غير العينية](course/phase_0_fundamentals/lesson_0_3_sampling_error_mechanics.md) | تشريح مصادر الخطأ وسلوكها |
+| # | الدرس | المحور |
+|---|-------|--------|
+| 0.1 | [مقدمة في مفاهيم معاينة المسوح](phases/00-sampling-fundamentals/01-intro-to-sampling/docs/en.md) | المجتمع، المعلمة، المقدِّر، MSE |
+| 0.2 | [المعاينة الاحتمالية مقابل غير الاحتمالية](phases/00-sampling-fundamentals/02-probability-vs-nonprobability/docs/en.md) | احتمالات الاشتمال، مقدِّر HT |
+| 0.3 | [خطأ المعاينة مقابل الأخطاء غير العينية](phases/00-sampling-fundamentals/03-sampling-error-mechanics/docs/en.md) | TSE، تحيز عدم الاستجابة |
 
-### المرحلة 1: البنية التحتية وتشخيص الأطر (*Survey Infrastructure & Frame Diagnostics*)
+### المرحلة 1: البنية التحتية وتشخيص الأطر `2 درسان`
 
-> تنظيف البيانات وتجهيز إطار المعاينة للعمل الميداني.
+| # | الدرس | المحور |
+|---|-------|--------|
+| 1.1 | [تنظيف إطار المعاينة](phases/01-infrastructure-frame-diagnostics/01-frame-cleaning-undercoverage/docs/en.md) | إزالة التكرارات، مؤشرات التغطية |
+| 1.2 | [تقسيم وتوحيد PSUs](phases/01-infrastructure-frame-diagnostics/02-psu-partitioning-harmonization/docs/en.md) | عتبات الحجم 80-150 أسرة |
 
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 1.1 | [تنظيف إطار المعاينة وتشخيص نقص التغطية](course/phase_1_infrastructure_frames/lesson_1_1_frame_diagnostics.md) | إزالة التكرارات، السجلات خارج النطاق، مؤشرات التغطية |
-| 1.2 | [تقسيم وتوحيد وحدات المعاينة الأولية](course/phase_1_infrastructure_frames/lesson_1_2_psu_partitioning.md) | دمج/تقسيم مناطق العد وفق عتبات الحجم |
+### المرحلة 2: التصاميم الاحتمالية من الصفر `3 دروس`
 
-### المرحلة 2: التصاميم الاحتمالية من الصفر (*Probability Sampling Designs From Scratch*)
+| # | الدرس | المحور |
+|---|-------|--------|
+| 2.1 | [المعاينة الطبقية والتوزيع الأمثل](phases/02-probability-sampling-designs/01-stratified-optimal-allocation/docs/en.md) | التناسبي مقابل نيمن |
+| 2.2 | [السحب المنتظم PPS](phases/02-probability-sampling-designs/02-systematic-pps-selection/docs/en.md) | طريقة الحجم التراكمي |
+| 2.3 | [محرك المعاينة العنقودية](phases/02-probability-sampling-designs/03-multistage-cluster-engine/docs/en.md) | PPS + SRS |
 
-> بناء محركات السحب الاحتمالي بدون مكتبات متخصصة.
+### المرحلة 3: حجم العينة وأثر التصميم `2 درسان`
 
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 2.1 | [المعاينة العشوائية الطبقية والتوزيع الأمثل](course/phase_2_probability_designs/lesson_2_1_stratified_opt_allocation.md) | التوزيع التناسبي مقابل توزيع نيمن |
-| 2.2 | [السحب المنتظم بالاحتمال المتناسب مع الحجم](course/phase_2_probability_designs/lesson_2_2_systematic_pps.md) | طريقة الحجم التراكمي |
-| 2.3 | [محرك المعاينة العنقودية متعددة المراحل](course/phase_2_probability_designs/lesson_2_3_multistage_engine.md) | PPS + معاينة منتظمة للأسر |
+| # | الدرس | المحور |
+|---|-------|--------|
+| 3.1 | [امتدادات معادلة كوكران](phases/03-sample-size-calibration/01-cochran-formula-extensions/docs/en.md) | FPC، Deff، عدم الاستجابة |
+| 3.2 | [أثر التصميم ومعامل ICC](phases/03-sample-size-calibration/02-deff-icc-mechanics/docs/en.md) | $Deff = 1 + (\bar{m}-1)\rho$ |
 
-### المرحلة 3: حجم العينة وأثر التصميم (*Sample Size Calibration & Design Effect*)
+### المرحلة 4: منظومة الأوزان والمعايرة `3 دروس`
 
-> إيجاد حجم العينة الأمثل رياضياً.
+| # | الدرس | المحور |
+|---|-------|--------|
+| 4.1 | [أوزان التصميم القاعدية](phases/04-weighting-calibration-pipeline/01-design-weights-generation/docs/en.md) | $W_{base} = 1/\pi_i$ |
+| 4.2 | [تعديل عدم الاستجابة](phases/04-weighting-calibration-pipeline/02-nonresponse-propensity-adjustment/docs/en.md) | نمذجة الميل |
+| 4.3 | [معايرة الأوزان — IPF/Raking](phases/04-weighting-calibration-pipeline/03-calibration-raking-ipf/docs/en.md) | التوازن التكراري |
 
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 3.1 | [امتدادات معادلة كوكران للمسوح المركبة](course/phase_3_sample_size_calibration/lesson_3_1_cochran_extensions.md) | تصحيح المجتمع المحدود وعدم الاستجابة |
-| 3.2 | [تفكيك أثر التصميم ومعامل الارتباط داخل العنقود](course/phase_3_sample_size_calibration/lesson_3_2_deff_icc_mechanics.md) | $Deff = 1 + (\bar{m}-1)\rho$ |
+### المرحلة 5: تقدير التباين `2 درسان`
 
-### المرحلة 4: منظومة الأوزان والمعايرة (*Weighting, Non-Response & Calibration Pipeline*)
-
-> تحويل الأعداد العينية إلى تقديرات وطنية.
-
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 4.1 | [أوزان التصميم (الأوزان القاعدية)](course/phase_4_weighting_pipeline/lesson_4_1_design_weights.md) | $W_{base} = 1/\pi_i$ |
-| 4.2 | [تعديل عدم الاستجابة بنمذجة الميل](course/phase_4_weighting_pipeline/lesson_4_2_nonresponse_propensity.md) | الانحدار اللوجستي لدرجات الميل |
-| 4.3 | [معايرة الأوزان (ما بعد الطبقية والتوازن التكراري)](course/phase_4_weighting_pipeline/lesson_4_3_calibration_raking.md) | خوارزمية IPF |
-
-### المرحلة 5: تقدير التباين في المسوح المركبة (*Variance Estimation in Complex Surveys*)
-
-> توليد أخطاء معيارية وفترات ثقة دقيقة.
-
-| الدرس | العنوان | المحور الأساسي |
-|-------|---------|---------------|
-| 5.1 | [خطية تايلور من الصفر](course/phase_5_variance_estimation/lesson_5_1_taylor_linearization.md) | تباين مقدِّر النسبة |
-| 5.2 | [محركات إعادة المعاينة: جاكنايف وبوتستراب](course/phase_5_variance_estimation/lesson_5_2_jackknife_replications.md) | Delete-One Jackknife |
+| # | الدرس | المحور |
+|---|-------|--------|
+| 5.1 | [خطية تايلور من الصفر](phases/05-variance-estimation/01-taylor-linearization/docs/en.md) | تباين مقدِّر النسبة |
+| 5.2 | [جاكنايف وبوتستراب](phases/05-variance-estimation/02-jackknife-bootstrap-replication/docs/en.md) | إعادة المعاينة |
 
 ---
 
-## كيف تستخدم هذا المستودع؟
+## منهجية الدرس: التدفق السداسي
 
-### المتطلبات الأساسية
+كل درس في هذا المستودع يتبع هيكلاً موحداً:
 
-**R** (الإصدار 4.0 أو أحدث):
+```
+MOTTO        → شعار مركّز يبقى في الذاكرة
+    ↓
+PROBLEM      → أزمة تشغيلية واقعية
+    ↓
+CONCEPT      → الحدس الرياضي (بدون كود)
+    ↓
+BUILD IT     → بناء الخوارزمية من الصفر (R + Python)
+    ↓
+USE IT       → نفس المسألة بالحزم الإنتاجية المعتمدة
+    ↓
+SHIP IT      → مخرج إنتاجي قابل لإعادة الاستخدام
+```
+
+---
+
+## كيف تبدأ؟
+
+### المتطلبات
+
+**R** (4.0+):
 ```r
 install.packages(c("survey", "sampling", "dplyr", "tidyr", "ggplot2"))
 ```
 
-**Python** (الإصدار 3.8 أو أحدث):
+**Python** (3.8+):
 ```bash
-pip install numpy pandas scipy scikit-learn samplics statsmodels
+pip install -r requirements.txt
 ```
 
 ### خطوات البدء
@@ -160,11 +189,10 @@ cd survey-sampling-ar
 ```bash
 Rscript scripts/generate_census_frame.R
 ```
-سيُنشئ ملف `census_frame.csv` يحتوي 500,000 صف يمثل أُسَراً موزعة على محافظات ومناطق.
 
-3. **ابدأ من المرحلة 0** واتبع الترتيب التسلسلي للدروس.
+3. **ابدأ من المرحلة 0** — اتبع الترتيب التسلسلي.
 
-4. **شغّل اختبارات التحقق:**
+4. **شغّل الاختبارات:**
 ```bash
 Rscript tests/test_phase_2_sampling.R
 Rscript tests/test_phase_4_weights.R
@@ -172,62 +200,27 @@ Rscript tests/test_phase_4_weights.R
 
 ---
 
-## منهجية الدرس: التدفق السداسي
-
-كل درس في هذا المستودع يتبع هيكلاً موحداً من 6 خطوات:
-
-```
-┌─────────────────────────────────────────────┐
-│  1. الشعار (Motto)                          │
-│     → قاعدة ذهبية مركّزة                    │
-├─────────────────────────────────────────────┤
-│  2. بيان المشكلة (Problem Statement)        │
-│     → أزمة تشغيلية واقعية من مكتب إحصائي   │
-├─────────────────────────────────────────────┤
-│  3. الحدس الرياضي (Mathematical Intuition)  │
-│     → المعادلات الحاكمة بصيغة LaTeX          │
-├─────────────────────────────────────────────┤
-│  4. ابنِها من الصفر (Build It From Scratch)  │
-│     → كود R + Python بدون مكتبات متخصصة     │
-├─────────────────────────────────────────────┤
-│  5. استخدمها (Use It — Production)           │
-│     → نفس المسألة بالحزم الإنتاجية المعتمدة │
-├─────────────────────────────────────────────┤
-│  6. أطلقها (Ship It — Production Artifact)   │
-│     → سكربت إنتاجي جاهز للنشر               │
-└─────────────────────────────────────────────┘
-```
-
----
-
 ## لمن هذا المستودع؟
 
-- **إحصائيو المسوح** في مكاتب الإحصاء الوطنية (*NSOs*) والمنظمات الدولية
+- **إحصائيو المسوح** في مكاتب الإحصاء الوطنية والمنظمات الدولية
 - **طلاب الدراسات العليا** في الإحصاء التطبيقي ومنهجية المسوح
-- **مهندسو البيانات** الذين يبنون خطوط أنابيب المعاينة (*Sampling Pipelines*)
-- **الباحثون** في العلوم الاجتماعية والاقتصادية الذين يتعاملون مع بيانات مسحية مركبة
-- **أي متعلم عربي** يريد فهم المعاينة الإحصائية بعمق هندسي لا سطحي
+- **مهندسو البيانات** الذين يبنون خطوط أنابيب المعاينة
+- **أي متعلم عربي** يريد فهم المعاينة الإحصائية بعمق هندسي
 
 ---
 
 ## المساهمة
 
-نرحب بمساهماتكم! إذا وجدتم خطأً رياضياً، أو أردتم تحسين كود، أو إضافة سيناريو واقعي جديد:
-
-1. افتحوا *Issue* يصف التحسين المقترح
-2. أنشئوا *Fork* وعدّلوا في فرع مستقل
-3. أرسلوا *Pull Request* مع شرح واضح للتعديلات
+اقرأ [دليل المساهمة](CONTRIBUTING.md) و [قالب الدرس](LESSON_TEMPLATE.md) قبل إرسال أي Pull Request.
 
 ---
 
 ## الترخيص
 
-هذا المستودع مرخص تحت رخصة **MIT** — استخدموه، عدّلوه، وزّعوه بحرية مع ذكر المصدر.
-
----
+هذا المستودع مرخص تحت رخصة [MIT](LICENSE).
 
 <p align="center">
-  <strong>⭐ إذا استفدتم من هذا المستودع، لا تنسوا نجمة التقدير ⭐</strong>
+  <strong>إذا استفدتم من هذا المستودع، لا تنسوا نجمة التقدير</strong>
 </p>
 
 </div>
